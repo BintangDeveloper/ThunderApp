@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\RedirectLinksResource\Pages;
-use App\Filament\Resources\RedirectLinksResource\RelationManagers;
-use App\Models\RedirectLinks;
+use App\Filament\Resources\SettingsResource\Pages;
+use App\Filament\Resources\SettingsResource\RelationManagers;
+use App\Models\Settings;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,13 +13,13 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class RedirectLinksResource extends Resource
+class SettingsResource extends Resource
 {
-    protected static ?string $model = RedirectLinks::class;
+    protected static ?string $model = Settings::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-link';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Management';
-    protected static ?string $slug = "management/redirect-links";
+    protected static ?string $slug = "management/settings";
 
     public static function form(Form $form): Form
     {
@@ -28,13 +28,16 @@ class RedirectLinksResource extends Resource
                 Forms\Components\TextInput::make('key')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('url')
+                Forms\Components\TextInput::make('data')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('permission')
                     ->required()
                     ->numeric()
                     ->default(0),
+                Forms\Components\Toggle::make('can_expaired')
+                    ->required(),
+                Forms\Components\DateTimePicker::make('expired'),
                 Forms\Components\TextInput::make('create_by')
                     ->maxLength(255),
             ]);
@@ -49,10 +52,15 @@ class RedirectLinksResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('key')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('url')
+                Tables\Columns\TextColumn::make('data')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('permission')
                     ->numeric()
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('can_expaired')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('expired')
+                    ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('create_by')
                     ->searchable(),
@@ -88,9 +96,9 @@ class RedirectLinksResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRedirectLinks::route('/'),
-            'create' => Pages\CreateRedirectLinks::route('/create'),
-            'edit' => Pages\EditRedirectLinks::route('/{record}/edit'),
+            'index' => Pages\ListSettings::route('/'),
+            'create' => Pages\CreateSettings::route('/create'),
+            'edit' => Pages\EditSettings::route('/{record}/edit'),
         ];
     }
 }

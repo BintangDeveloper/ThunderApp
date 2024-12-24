@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('redirect_links', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('key');
-            $table->string('url');
+            $table->string('data');
             $table->unsignedSmallInteger('permission')->default(0);
+            $table->boolean('can_expaired')->default(false);
+            $table->timestamp('expired')->nullable();
             $table->string('create_by')->nullable();
             $table->timestamps();
         });
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('redirect_links');
+        Schema::dropIfExists('settings');
     }
 };

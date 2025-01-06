@@ -7,11 +7,11 @@ use Illuminate\Http\JsonResponse;
 class JsonResponseHelper
 {
     /**
-     * Enable JSON pretty print.
+     * Enable JSON pretty print by default.
      *
      * @var bool
      */
-    private static bool $prettyPrint = true;
+    private static bool $prettyPrint = false;
 
     /**
      * Constructor to set pretty print.
@@ -42,7 +42,7 @@ class JsonResponseHelper
             'status' => $isError ? 'error' : 'success',
             'responseTime' => "{$responseTime}ms",
             $isError ? 'error' : 'data' => $data,
-            'timestamp' => date("Y-m-d H:i:s"),
+            'timestamp' => now()->toIso8601String(),
         ];
 
         if (!empty($meta)) {

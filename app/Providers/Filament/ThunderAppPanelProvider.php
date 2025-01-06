@@ -28,8 +28,45 @@ class ThunderAppPanelProvider extends PanelProvider
             ->path('/')
             ->login()
             ->colors([
-                'primary' => Color::Indigo,
-                'gray' => Color::Slate
+                /*'primary' => [
+                    50 => '255, 228, 230', // Soft pale red
+                    100 => '254, 205, 209', // Pale red
+                    200 => '252, 165, 178', // Light blood red
+                    300 => '249, 113, 126', // Brightened blood red
+                    400 => '244, 63, 94',   // Vibrant neon red
+                    500 => '225, 29, 72',   // Classic blood red
+                    600 => '190, 18, 60',   // Dark neon red
+                    700 => '159, 14, 50',   // Deep blood red
+                    800 => '120, 11, 38',   // Blackened red
+                    900 => '89, 8, 28',     // Almost black-red
+                    950 => '53, 5, 16',     // Pure dark red
+                ],*/
+                'primary' => [
+                    50 => '255, 0, 0', // Soft pale red
+                    100 => '254, 0, 0', // Pale red
+                    200 => '252, 0, 0', // Light blood red
+                    300 => '249, 0, 0', // Brightened blood red
+                    400 => '244, 0, 0', // Vibrant neon red
+                    500 => '225, 0, 0', // Classic blood red
+                    600 => '190, 0, 0', // Dark neon red
+                    700 => '159, 0, 0', // Deep blood red
+                    800 => '120, 0, 0', // Blackened red
+                    900 => '89, 0, 0', // Almost black-red
+                    950 => '53, 0, 0', // Pure dark red
+                ],
+                'gray' => [
+                    50 => '250, 250, 250',
+                    100 => '245, 245, 245',
+                    200 => '229, 229, 229',
+                    300 => '204, 204, 204',
+                    400 => '163, 163, 163',
+                    500 => '115, 115, 115',
+                    600 => '82, 82, 82',
+                    700 => '64, 64, 64',
+                    800 => '38, 38, 38',
+                    900 => '23, 23, 23',
+                    950 => '12, 12, 12',
+                ]
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -59,4 +96,5 @@ class ThunderAppPanelProvider extends PanelProvider
             ->unsavedChangesAlerts()
             ->passwordReset();
     }
+    
 }

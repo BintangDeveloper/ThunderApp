@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
             ['email' => 'me@local.dev'],
             [
                 'name' => 'Administrator',
-                'password' => Hash::make('19216811'),
+                'password' => Hash::make('1388582293'),
                 'permission' => 255,
                 'email_verified_at' => now()
             ]

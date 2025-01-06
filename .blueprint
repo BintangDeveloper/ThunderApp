@@ -1,0 +1,10 @@
+created:
+    - database/factories/ApiTokenFactory.php
+    - database/factories/PostUsageFactory.php
+    - database/migrations/2025_01_02_122021_create_api_tokens_table.php
+    - database/migrations/2025_01_02_122022_create_post_usages_table.php
+    - app/Models/ApiToken.php
+    - app/Models/PostUsage.php
+models:
+    ApiToken: { name: string, token: 'string unique', user_id: 'foreignId constrained', expires_at: 'timestamp nullable', timestamps: timestamps }
+    PostUsage: { user_id: 'foreignId constrained', post_id: 'foreignId constrained', usage_count: integer, last_used_at: 'timestamp nullable', timestamps: timestamps }

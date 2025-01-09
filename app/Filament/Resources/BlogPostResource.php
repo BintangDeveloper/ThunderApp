@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SettingsResource\Pages;
-use App\Filament\Resources\SettingsResource\RelationManagers;
-use App\Models\Settings;
+use App\Filament\Resources\BlogPostResource\Pages;
+use App\Filament\Resources\BlogPostResource\RelationManagers;
+use App\Models\BlogPost;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,20 +13,20 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SettingsResource extends Resource
+class BlogPostResource extends Resource
 {
-    protected static ?string $model = Settings::class;
+    protected static ?string $model = BlogPost::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-cog';
-    protected static ?string $label = 'App Settings';
-    protected static ?string $navigationGroup = 'Configuration';
-    protected static ?string $slug = "admin/settings";
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $label = 'Manage Blog Posts';
+    protected static ?string $navigationGroup = 'Content Management';
+    protected static ?string $slug = "admin/blog-posts";
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('key')
+                Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('data')
@@ -36,11 +36,7 @@ class SettingsResource extends Resource
                     ->required()
                     ->numeric()
                     ->default(0),
-                Forms\Components\Toggle::make('can_expaired')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('expired'),
-                Forms\Components\TextInput::make('create_by')
-                    ->maxLength(255),
+                Forms\Components\DateTimePicker::make('expired_at'),
             ]);
     }
 
@@ -51,20 +47,16 @@ class SettingsResource extends Resource
                 Tables\Columns\TextColumn::make('id')
                     ->label('ID')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('key')
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('data')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('permission')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\IconColumn::make('can_expaired')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('expired')
+                Tables\Columns\TextColumn::make('expired_at')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('create_by')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -97,9 +89,9 @@ class SettingsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSettings::route('/'),
-            'create' => Pages\CreateSettings::route('/create'),
-            'edit' => Pages\EditSettings::route('/{record}/edit'),
+            'index' => Pages\ListBlogPosts::route('/'),
+            'create' => Pages\CreateBlogPost::route('/create'),
+            'edit' => Pages\EditBlogPost::route('/{record}/edit'),
         ];
     }
 }

@@ -18,9 +18,9 @@ class RedirectLinksResource extends Resource
     protected static ?string $model = RedirectLinks::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-link';
-    protected static ?string $label = 'heroicon-o-link';
-    protected static ?string $navigationGroup = 'Management';
-    protected static ?string $slug = "management/redirect-links";
+    protected static ?string $label = 'Redirect Links';
+    protected static ?string $navigationGroup = 'Content Management';
+    protected static ?string $slug = "admin/short-urls";
 
     public static function form(Form $form): Form
     {

@@ -13,7 +13,7 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('_internal')->group(
   base_path('routes/api/_internalRoute.php')
-);->middleware(ApiTokenMiddleware::class);
+)->middleware(ApiTokenMiddleware::class);
 
 Route::prefix('v1')->group(
   base_path('routes/api/v1.php')

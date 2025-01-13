@@ -32,9 +32,10 @@ class ApiTokenResource extends Resource
                 Forms\Components\TextInput::make('token')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\TextInput::make('create_by')
+                    ->maxLength(36),
+                Forms\Components\Toggle::make('can_expaired')
+                    ->required(),
                 Forms\Components\DateTimePicker::make('expires_at'),
             ]);
     }
@@ -50,8 +51,10 @@ class ApiTokenResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('token')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('user_id')
+                Tables\Columns\TextColumn::make('create_by')
                     ->searchable(),
+                Tables\Columns\IconColumn::make('can_expaired')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('expires_at')
                     ->dateTime()
                     ->sortable(),

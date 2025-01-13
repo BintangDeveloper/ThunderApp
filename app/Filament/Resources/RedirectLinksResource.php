@@ -37,7 +37,10 @@ class RedirectLinksResource extends Resource
                     ->numeric()
                     ->default(0),
                 Forms\Components\TextInput::make('create_by')
-                    ->maxLength(255),
+                    ->maxLength(36),
+                Forms\Components\Toggle::make('can_expaired')
+                    ->required(),
+                Forms\Components\DateTimePicker::make('expired_at'),
             ]);
     }
 
@@ -57,6 +60,11 @@ class RedirectLinksResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('create_by')
                     ->searchable(),
+                Tables\Columns\IconColumn::make('can_expaired')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('expired_at')
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

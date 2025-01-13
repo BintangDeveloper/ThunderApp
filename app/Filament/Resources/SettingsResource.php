@@ -36,11 +36,11 @@ class SettingsResource extends Resource
                     ->required()
                     ->numeric()
                     ->default(0),
+                Forms\Components\TextInput::make('create_by')
+                    ->maxLength(36),
                 Forms\Components\Toggle::make('can_expaired')
                     ->required(),
-                Forms\Components\DateTimePicker::make('expired'),
-                Forms\Components\TextInput::make('create_by')
-                    ->maxLength(255),
+                Forms\Components\DateTimePicker::make('expired_at'),
             ]);
     }
 
@@ -58,13 +58,13 @@ class SettingsResource extends Resource
                 Tables\Columns\TextColumn::make('permission')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\IconColumn::make('can_expaired')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('expired')
-                    ->dateTime()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('create_by')
                     ->searchable(),
+                Tables\Columns\IconColumn::make('can_expaired')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('expired_at')
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

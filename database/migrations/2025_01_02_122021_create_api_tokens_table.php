@@ -15,9 +15,12 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('token')->unique();
-            $table->string('user_id');
+            $table->uuid('create_by')->nullable();
+            $table->boolean('can_expaired')->default(false);
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
+            
+            $table->foreign('create_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

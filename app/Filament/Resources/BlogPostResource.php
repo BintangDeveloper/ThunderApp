@@ -29,13 +29,17 @@ class BlogPostResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('data')
+                Forms\Components\Textarea::make('data')
                     ->required()
-                    ->maxLength(255),
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('permission')
                     ->required()
                     ->numeric()
                     ->default(0),
+                Forms\Components\TextInput::make('create_by')
+                    ->maxLength(36),
+                Forms\Components\Toggle::make('can_expaired')
+                    ->required(),
                 Forms\Components\DateTimePicker::make('expired_at'),
             ]);
     }
@@ -49,11 +53,13 @@ class BlogPostResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('data')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('permission')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('create_by')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('can_expaired')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('expired_at')
                     ->dateTime()
                     ->sortable(),
